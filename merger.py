@@ -6,19 +6,24 @@ cd1 = "C:/Users/jorda/Desktop/Python/users_answers/"
 cd2 = "C:/Users/jorda/Desktop/Python/files/"
 ganesh = "Ganesh_template.csv"
 
+user_amount = []
+
 #reading user_amount:
 #nog niet AF:
 with open('./user_amount.csv', 'r') as amountfile:
-    reader1 = csv.reader(amountfile)
-    header_ganesh = next(reader1)
-print("Merging the answers of users....")
+    reader = csv.reader(amountfile)
+    for row in reader:
+        user_amount.append(row)
+    amountfile.close()
 
-
-
+print(user_amount)
 
 with open('./files/{}'.format(ganesh), 'r') as file:
-    reader = csv.reader(file)
+    reader1 = csv.reader(file)
     header_ganesh = next(reader1)
+    print("Merging the answers of users....")
+
+        
 print("Merging the answers of users....")
 
 
@@ -47,13 +52,22 @@ with open("Merged_amount.csv", "w", newline='') as output:
         for i in range(len(user_amount)):
             with open('./user_answers/{}'.format(filename), 'r') as file:
                 print("File successfully opened")
-                if filename == user_amount[i][0]:
+                if filename == user_amount[i][0]+".csv":
                     reader = csv.reader(file)
                     if next(reader) != None:
+                        print("se")
                         for row in reader:
                             for i in range(int(user_amount[i][1])):
+                    
                                 writer.writerow(row)
                         print("All rows written\n")
+                    else:
+                        print("No")
                         
     output.close()
+    
+   
+    
+        
+
                     
